@@ -1,0 +1,27 @@
+{
+    "explores": [
+        {
+            "description": null,
+            "label": "Ga Sessions",
+            "hidden": false,
+            "group_label": "Sa Demo Final",
+            "name": "ga_sessions",
+            "can": {}
+        }
+    ],
+    "has_content": true,
+    "label": "Sa Demo Final",
+    "name": "sa_demo_final",
+    "project_name": "sa_demo_final",
+    "unlimited_db_connections": false,
+    "allowed_db_connection_names": [
+        "ga_looker"
+    ],
+    "can": {
+        "index": true,
+        "show": true,
+        "create": true,
+        "update": true,
+        "destroy": true
+    }
+}

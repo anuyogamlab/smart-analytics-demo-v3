@@ -1,0 +1,10 @@
+{
+    "project" : "smart-analytics-demo-01",
+    "GOOGLE_APPLICATION_CREDENTIALS" : "/Users/paternostro/smart-analytics-demo-01.json",
+    "environment" : "myid-dev",
+    "looker_customer_id" : "googlecloud",
+    "LOOKER_APPLICATION_CREDENTIALS" : "/Users/paternostro/looker-username-password.json",
+    "looker_git_remote_url" : "git@github.com:AdamPaternostro/smart-analytics-demo-01.git",
+    "looker_origin" : "origin/master",
+    "oracle_install_zip" : "gs://sa-oracle-install/V839960-01.zip"
+}

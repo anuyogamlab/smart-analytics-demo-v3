@@ -1,0 +1,22 @@
+CREATE OR REPLACE MODEL
+  datafusiontest.googleanalyticscluster OPTIONS(model_type='kmeans',
+    num_clusters=4) AS (
+  SELECT
+    body_visitNumber,
+    body_visitStartTime,
+    body_date,
+    body_channelGrouping,
+    body_totals_visits,
+    body_device_operatingSystem,
+    body_device_isMobile,
+    body_geoNetwork_continent,
+    body_geoNetwork_subContinent,
+    body_geoNetwork_country,
+    body_hits_dataSource,
+    body_hits_page_pagePath,
+    body_hits_page_hostname,
+    body_hits_page_pageTitle
+  FROM
+    `smart-analytics-demo-01.datafusiontest.googleanalyticsdata1`
+  WHERE
+    DATE(_PARTITIONTIME) = "2020-12-29" )

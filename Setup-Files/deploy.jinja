@@ -1,0 +1,106 @@
+# Copyright 2017 Google Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#% description: Creates a Dataproc cluster.
+#% parameters:
+{% set dataLakeBucket    = "sa-datalake-" + properties["environment"] %}
+{% set ingestionBucket   = "sa-ingestion-" + properties["environment"] %}
+{% set sourceDataBucket  = "sa-source-data-" + properties["environment"] %}
+{% set clusterName       = "sa-dataproc-" + properties["environment"] %}
+{% set topic             = 'sa-pubsub-topic-' + properties['environment'] %}
+{% set subscription      = 'sa-pubsub-subscription-' + properties['environment']  %}
+{% set DATASET           = ('sa-bq-dataset-' + properties['environment']) | replace("-","_") %}
+{% set DATASET_LOOKER    = ('sa-bq-dataset-' + properties['environment'] + "_looker") | replace("-","_") %}
+{% set DATASET_ORACLE    = ('sa-bq-dataset-' + properties['environment'] + "_oracle") | replace("-","_") %}
+# {% set TABLE             = ('sa-bq-table-'   + properties['environment']) | replace("-","_") %}
+
+
+resources:
+- name: {{ dataLakeBucket }}
+  type: gcp-types/storage-v1:buckets
+  properties:
+    predefinedAcl: projectPrivate
+    projectNumber: {{ properties["projectNumber"] }}
+    location: {{ properties["region"] }}
+    storageClass: STANDARD
+
+- name: {{ ingestionBucket }}
+  type: gcp-types/storage-v1:buckets
+  properties:
+    predefinedAcl: projectPrivate
+    projectNumber: {{ properties["projectNumber"] }}
+    location: {{ properties["region"] }}
+    storageClass: STANDARD
+
+- name: {{ sourceDataBucket }}
+  type: gcp-types/storage-v1:buckets
+  properties:
+    predefinedAcl: projectPrivate
+    projectNumber: {{ properties["projectNumber"] }}
+    location: {{ properties["region"] }}
+    storageClass: STANDARD
+
+# This will be created automatically via the Airflow pipeline
+# - name: {{ clusterName }}
+#   type: gcp-types/dataproc-v1:projects.regions.clusters
+#   properties:
+#     region: {{ properties["region"] }}
+#     projectId: {{ properties["project"] }}
+#     clusterName: {{ clusterName }}
+#     config:
+#       gceClusterConfig:
+#         zoneUri: https://www.googleapis.com/compute/v1/projects/{{ properties["project"] }}/zones/{{ properties["zone"] }}
+#       masterConfig:
+#         numInstances: 1
+#         machineTypeUri: https://www.googleapis.com/compute/v1/projects/{{ properties["project"] }}/zones/{{ properties["zone"] }}/machineTypes/n1-standard-2
+#       workerConfig:
+#         numInstances: 2
+#         machineTypeUri: https://www.googleapis.com/compute/v1/projects/{{ properties["project"] }}/zones/{{ properties["zone"] }}/machineTypes/n1-standard-2
+
+- name: {{ topic }}
+  type: gcp-types/pubsub-v1:projects.topics
+  properties:
+    topic: {{ topic }}
+
+- name: {{ subscription }}
+  type: gcp-types/pubsub-v1:projects.subscriptions
+  properties:
+    subscription: {{ subscription }}
+    topic: $(ref.{{ topic }}.name)
+
+- name: {{ DATASET }}
+  type: gcp-types/bigquery-v2:datasets
+  properties:
+    datasetReference:
+      datasetId: {{ DATASET }}
+
+- name: {{ DATASET_LOOKER }}
+  type: gcp-types/bigquery-v2:datasets
+  properties:
+    datasetReference:
+      datasetId: {{ DATASET_LOOKER }}
+
+- name: {{ DATASET_ORACLE }}
+  type: gcp-types/bigquery-v2:datasets
+  properties:
+    datasetReference:
+      datasetId: {{ DATASET_ORACLE }}
+
+
+# - name: {{ TABLE }}
+#   type: gcp-types/bigquery-v2:tables
+#   properties:
+#     datasetId: $(ref.{{ DATASET }}.datasetReference.datasetId)
+#     tableReference:
+#       tableId: {{ TABLE }}

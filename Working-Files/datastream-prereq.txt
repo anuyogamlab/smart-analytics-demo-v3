@@ -1,0 +1,33 @@
+ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
+
+SELECT LOG_MODE FROM V$DATABASE;
+If the result is ARCHIVELOG, move on to the next step.
+If the result is NOARCHIVELOG, then you'll need to enable ARCHIVELOG mode for your database.
+SHUTDOWN IMMEDIATE;
+STARTUP MOUNT;
+ALTER DATABASE;
+ALTER DATABASE ARCHIVELOG;
+ALTER DATABASE OPEN;
+
+? ALTER DATABASE ADD SUPPLEMENTAL LOG DATA; ?
+
+CREATE USER datacdc IDENTIFIED BY MyPassword;
+GRANT EXECUTE_CATALOG_ROLE TO datacdc;
+GRANT CONNECT TO datacdc;
+GRANT CREATE SESSION TO datacdc;
+GRANT SELECT ON SYS.V_$DATABASE TO datacdc;
+GRANT SELECT ON SYS.V_$ARCHIVED_LOG TO datacdc;
+GRANT SELECT ON SYS.V_$LOGMNR_CONTENTS TO datacdc;
+GRANT SELECT ON SYS.V_$LOGMNR_LOGS TO datacdc;
+GRANT EXECUTE ON DBMS_LOGMNR TO datacdc;
+GRANT EXECUTE ON DBMS_LOGMNR_D TO datacdc;
+GRANT SELECT ANY TRANSACTION TO datacdc;
+GRANT SELECT ANY TABLE TO datacdc;
+GRANT LOGMINING TO datacdc;
+
+
+Prepare a Cloud Storage bucket where DataStream will write the event data files. This can be an existing or new bucket created for DataStream.
+If you’re writing to a bucket in the same project where you’ll be calling the DataStream API, then enabling the DataStream API is sufficient (no additional steps required).
+If you're writing to a bucket in another project, then you must give the service account associated with the DataStream permission to access the bucket.
+Obtain the email address used for the service account. To do so, find the Project number in the Cloud Console home page. The email address of the service account will be service-[project_number]@gcp-sa-datastream.iam.gserviceaccount.com .
+Grant this email address the required IAM permissions to write to the destination bucket (typically the roles/storage.objectViewer, roles/storage.objectCreator and roles/storage.legacyBucketReader permissions).

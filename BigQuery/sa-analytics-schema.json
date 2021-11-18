@@ -1,0 +1,271 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "visitId",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "visitNumber",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "visitStartTime",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "channelGrouping",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "date",
+    "type": "DATE"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "fullVisitorId",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "socialEngagementType",
+    "type": "STRING"
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "hits",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "bounces",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "newVisits",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "pageviews",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "totalTransactionRevenue",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "transactionRevenue",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "transactions",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "visits",
+        "type": "INTEGER"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "totals",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "campaign",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "isTrueDirect",
+        "type": "BOOLEAN"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "keyword",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "source",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "trafficSource",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "browser",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "browserVersion",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "deviceCategory",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "isMobile",
+        "type": "BOOLEAN"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "device",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "city",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "country",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "latitude",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "longitude",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "geoNetwork",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "type",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "time",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "hitNumber",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "isEntrance",
+        "type": "BOOLEAN"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "isExit",
+        "type": "BOOLEAN"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "isInteraction",
+        "type": "BOOLEAN"
+      },
+      {
+        "fields": [
+          {
+            "mode": "NULLABLE",
+            "name": "hostname",
+            "type": "STRING"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "pagePath",
+            "type": "STRING"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "pageTitle",
+            "type": "STRING"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "searchCategory",
+            "type": "STRING"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "searchKeyword",
+            "type": "STRING"
+          }
+        ],
+        "mode": "NULLABLE",
+        "name": "page",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "mode": "NULLABLE",
+            "name": "affiliation",
+            "type": "STRING"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "currencyCode",
+            "type": "STRING"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "transactionId",
+            "type": "STRING"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "transactionRevenue",
+            "type": "INTEGER"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "transactionShipping",
+            "type": "INTEGER"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "transactionTax",
+            "type": "INTEGER"
+          }
+        ],
+        "mode": "NULLABLE",
+        "name": "transaction",
+        "type": "RECORD"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "hits",
+    "type": "RECORD"
+  }
+]
